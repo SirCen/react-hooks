@@ -16,7 +16,13 @@ function App() {
   //if second param is empty [], then doesnt change the effect
   useEffect(() => {
     console.log("render");
-  }, [values.email, values.password]);
+
+    //cleanup function, returned
+    return () => {
+      console.log("unmount");
+    }
+
+  }, []);
 
   return (
     <div>
