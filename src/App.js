@@ -2,6 +2,7 @@ import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
 //import { useFetch } from './useFetch';
 import { useForm } from './useForm';
 import { Hello } from './Hello';
+import {useMeasurements} from './useMeasurements';
 //Example expensive initial state
 // function expensiveInitState() {
 //   return 10;
@@ -24,13 +25,16 @@ function App() {
   //   console.log(inputRef.current.getBoundingClientRect());
   // }, []);
 
+  const [rect, inputRef2 ] = useMeasurements([]);
+
+
   return (
     <div>
       <>
       <button onClick={() => setShowHello(!showHello)}>toggle</button>
       {showHello && <Hello />}
       <input ref={inputRef} name='email' value={values.email} onChange={handleChange} />
-      <input placeholder="first name" name='firstName' value={values.firstName} onChange={handleChange} />
+      <input ref={inputRef2} placeholder="first name" name='firstName' value={values.firstName} onChange={handleChange} />
       <input type='password' name='password' value={values.password} onChange={handleChange} />
       <button onClick={() =>{
         inputRef.current.focus();
