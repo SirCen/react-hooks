@@ -16,17 +16,26 @@ function App() {
   //second param is dependency array of values, if they change the effect is fired again
   //if second param is empty [], then doesnt change the effect
   //can have more than one useEffect in component and fire in order
-  useEffect(() => {
-    const onMouseMove = e => {
-      console.log(e);
-    };
-    window.addEventListener('mousemove', onMouseMove);
-    //cleanup function, returned
-    return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-    }
+  // useEffect(() => {
+  //   const onMouseMove = e => {
+  //     console.log(e);
+  //   };
+  //   window.addEventListener('mousemove', onMouseMove);
+  //   //cleanup function, returned
+  //   return () => {
+  //     window.removeEventListener('mousemove', onMouseMove);
+  //   }
 
+  // }, []);
+
+  useEffect(() => {
+    console.log('mount1');
   }, []);
+
+  useEffect(() => {
+    console.log('mount2');
+  }, []);
+  
 
   return (
     <div>
