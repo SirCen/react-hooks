@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react';
-import { useFetch } from './useFetch';
+import React, {useState, useEffect, useRef, useLayoutEffect} from 'react';
+//import { useFetch } from './useFetch';
 import { useForm } from './useForm';
 import { Hello } from './Hello';
 //Example expensive initial state
@@ -17,8 +17,12 @@ function App() {
   
   const inputRef = useRef();
   const hello = useRef(() => {console.log('Hello');});
-
-
+  // fires synchronously after all DOM mutations
+  //good for getting measurements of DOM components after render
+  // dont use unless useEffect does not work
+  useLayoutEffect(() => {
+    console.log(inputRef.current.getBoundingClientRect());
+  }, []);
 
   return (
     <div>
