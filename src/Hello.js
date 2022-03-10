@@ -2,6 +2,6 @@ import React from "react";
 import {useCountRenders} from "./useCountRenders";
 //memo compares props, if changed: rerender component
 export const Hello = React.memo(({increment}) => {
-    useCountRenders();
+    //useCountRenders();
     return <button onClick={() => increment(5)}>hello</button>
 });
