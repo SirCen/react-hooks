@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect} from 'react';
 import { useForm } from './useForm';
 
 //Example expensive initial state
@@ -9,11 +9,19 @@ import { useForm } from './useForm';
 function App() {
   // useState(() => expensiveInitState()); // will only call expensive state once, saving on computation
 
-  const [values, handleChange] = useForm({email: "", password: ""});
+  const [values, handleChange] = useForm({email: "", password: "", firstName: ""});
+  
+  //runs everytime the page is rendered
+  //second param is dependency array of values, if they change the effect is fired again
+  //if second param is empty [], then doesnt change the effect
+  useEffect(() => {
+    console.log("render");
+  }, [values.email, values.password]);
 
   return (
     <div>
       <input name='email' value={values.email} onChange={handleChange} />
+      <input placeholder="first name" name='firstName' value={values.firstName} onChange={handleChange} />
       <input type='password' name='password' value={values.password} onChange={handleChange} />
     </div>
   );
