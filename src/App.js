@@ -6,8 +6,8 @@ function App() {
   const [count, setCount] = useState(0);
   // useful when needing to prevent functions from changing value such as when using memo
   //can pass in parameters
-  const increment = useCallback(() => {
-    setCount(c => c+1);
+  const increment = useCallback((n) => {
+    setCount(c => c+n);
   }, [setCount]);
 
   return (
