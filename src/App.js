@@ -20,9 +20,9 @@ function App() {
   // fires synchronously after all DOM mutations
   //good for getting measurements of DOM components after render
   // dont use unless useEffect does not work
-  useLayoutEffect(() => {
-    console.log(inputRef.current.getBoundingClientRect());
-  }, []);
+  // useLayoutEffect(() => {
+  //   console.log(inputRef.current.getBoundingClientRect());
+  // }, []);
 
   return (
     <div>
