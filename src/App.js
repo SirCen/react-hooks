@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import { useFetch } from './useFetch';
 import { useForm } from './useForm';
 //import { Hello } from './Hello';
 //Example expensive initial state
@@ -11,11 +12,13 @@ function App() {
 
   const [values, handleChange] = useForm({email: "", password: "", firstName: ""});
   
+  const {data, loading} = useFetch("http://numbersapi.com/43/trivia");
   //const [showHello, setShowHello] = useState(true);
   //runs everytime the page is rendered
   //second param is dependency array of values, if they change the effect is fired again
   //if second param is empty [], then doesnt change the effect
   //can have more than one useEffect in component and fire in order
+  //http://numbersapi.com/43/trivia
   // useEffect(() => {
   //   const onMouseMove = e => {
   //     console.log(e);
@@ -28,17 +31,18 @@ function App() {
 
   // }, []);
 
-  useEffect(() => {
-    console.log('mount1');
-  }, []);
+  // useEffect(() => {
+  //   console.log('mount1');
+  // }, []);
 
-  useEffect(() => {
-    console.log('mount2');
-  }, []);
+  // useEffect(() => {
+  //   console.log('mount2');
+  // }, []);
   
 
   return (
     <div>
+      <div>{loading ? "loading..." : data }</div>
       <>
       {/* <button onClick={() => setShowHello(!showHello)}>toggle</button> */}
       {/* {showHello && <Hello />} */}
