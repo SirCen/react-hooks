@@ -13,7 +13,12 @@ function App() {
 //currently does not do merging of states so count2 will disappear
   return (
     <div>
-      <button onClick={() => setCount(currentState => ({count: currentState.count+1}))}>
+      <button onClick={() => 
+        setCount(currentState => ({
+          ...currentState, 
+          count: currentState.count+1
+        }))
+      }>
         +
       </button>
       <div>count1: {count}</div>
