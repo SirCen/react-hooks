@@ -8,17 +8,16 @@ import React, {useState} from 'react';
 function App() {
   // useState(() => expensiveInitState()); // will only call expensive state once, saving on computation
 
-  const [{count, count2}, setCount] = useState({count:10, count2: 20});
+  const [count, setCount] = useState(10);
+  const [count2, setCount2] = useState(20);
 
 //currently does not do merging of states so count2 will disappear
   return (
     <div>
-      <button onClick={() => 
-        setCount(currentState => ({
-          ...currentState, 
-          count: currentState.count+1
-        }))
-      }>
+      <button onClick={() => {
+        setCount(c => c+1);
+        setCount2(c => c+1);
+      }}>
         +
       </button>
       <div>count1: {count}</div>
