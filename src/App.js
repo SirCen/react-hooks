@@ -11,8 +11,8 @@ function App() {
   // useState(() => expensiveInitState()); // will only call expensive state once, saving on computation
 
   const [values, handleChange] = useForm({email: "", password: "", firstName: ""});
-  
-  const {data, loading} = useFetch("http://numbersapi.com/43/trivia");
+  const [count, setCount] = useState(0);
+  const {data, loading} = useFetch(`http://numbersapi.com/${count}/trivia`);
   //const [showHello, setShowHello] = useState(true);
   //runs everytime the page is rendered
   //second param is dependency array of values, if they change the effect is fired again
@@ -42,7 +42,9 @@ function App() {
 
   return (
     <div>
-      <div>{loading ? "loading..." : data }</div>
+      <div>{!data ? "loading..." : data }</div>
+      <div>count: {count}</div>
+      <button onClick={() => setCount(c => c+1)}>increment</button>
       <>
       {/* <button onClick={() => setShowHello(!showHello)}>toggle</button> */}
       {/* {showHello && <Hello />} */}
