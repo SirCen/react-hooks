@@ -1,20 +1,5 @@
-import React, {useState, useMemo} from 'react';
+import React, {useState, useMemo, useCallback} from 'react';
 import { useFetch } from './useFetch';
-
-const computeLongestWord = (arr) => {
-  if (!arr) {
-    return [];
-  }
-  console.log('computing longest word');
-  let longestWord = '';
-  JSON.parse(arr).forEach(sentence => sentence.split(' ').forEach(word => {
-    if (word.length > longestWord.length) {
-      longestWord = word;
-    }
-  }) 
-  );
-  return longestWord;
-}
 
 function App() {
 
@@ -22,22 +7,24 @@ function App() {
   const {data} = useFetch("https://raw.githubusercontent.com/ajzbc/kanye.rest/master/quotes.json");
   
   //this will fire this function every render
-  // const computeLongestWord = (arr) => {
-  //   if (!arr) {
-  //     return [];
-  //   }
-  //   console.log('computing longest word');
-  //   let longestWord = '';
-  //   JSON.parse(arr).forEach(sentence => sentence.split(' ').forEach(word => {
-  //     if (word.length > longestWord.length) {
-  //       longestWord = word;
-  //     }
-  //   }) 
-  //   );
-  //   return longestWord;
-  // }
+  // with useCallback only fires once or when data is changed
+  //if no dependencies in useCallback, better to place as function outside
+  const computeLongestWord = useCallback((arr) => {
+    if (!arr) {
+      return [];
+    }
+    console.log('computing longest word');
+    let longestWord = '';
+    JSON.parse(arr).forEach(sentence => sentence.split(' ').forEach(word => {
+      if (word.length > longestWord.length) {
+        longestWord = word;
+      }
+    }) 
+    );
+    return longestWord;
+  }, []);
 
-  const longestWord = useMemo(() => computeLongestWord(data), [data]);
+  const longestWord = useMemo(() => computeLongestWord(data), [computeLongestWord, data]);
 
   return (
     <div>
