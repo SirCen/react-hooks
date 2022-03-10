@@ -7,7 +7,8 @@ export const useFetch = (url) => {
         fetch(url).then(x => x.text()).then(y => {
             setState({data: y, loading: false});
         });
-    }, [url]);
+    }, [url, setState]);
+    //ensure dependency is not changing based on what the useEffect calls or can get stuck in loop
 
     return state;
 };

@@ -11,8 +11,14 @@ function App() {
   // useState(() => expensiveInitState()); // will only call expensive state once, saving on computation
 
   const [values, handleChange] = useForm({email: "", password: "", firstName: ""});
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(() => 
+    JSON.parse(localStorage.getItem('count'))
+  );
   const {data, loading} = useFetch(`http://numbersapi.com/${count}/trivia`);
+  //if count changes sets count in local storage
+  useEffect(() => {
+    localStorage.setItem('count', JSON.stringify(count));
+  }, [count]);
   //const [showHello, setShowHello] = useState(true);
   //runs everytime the page is rendered
   //second param is dependency array of values, if they change the effect is fired again
