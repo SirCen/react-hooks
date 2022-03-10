@@ -16,7 +16,8 @@ function App() {
   const [showHello, setShowHello] = useState(true);
   
   const inputRef = useRef();
-  
+  const hello = useRef(() => {console.log('Hello');});
+
 
 
   return (
@@ -29,6 +30,7 @@ function App() {
       <input type='password' name='password' value={values.password} onChange={handleChange} />
       <button onClick={() =>{
         inputRef.current.focus();
+        hello.current();
       }}>focus</button>
       </>
     </div>
