@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {BrowserRouter as Router, Route, Routes, Link} from "react-router-dom";
 import { Index } from "./pages";
 import { About } from "./pages/about";
 import { UserContext } from "./UserContext";
 
 function AppRouter() {
+
+  const [value, setValue] = useState('hello from context');
 
   return (
     <Router>
@@ -19,7 +21,7 @@ function AppRouter() {
             </li>
           </ul>
         </nav>
-        <UserContext.Provider value="hello from context">
+        <UserContext.Provider value={{value, setValue}}>
           <Routes>
             <Route path="/" exact element={<Index />} />
             <Route path="/about/" element={<About />} />
